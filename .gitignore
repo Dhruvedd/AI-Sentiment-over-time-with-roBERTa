@@ -24,11 +24,12 @@ env/
 notebooks/*
 !notebooks/analysis.ipynb
 
-# --- Data (never commit raw or derived data; reproduce from src) ---
+# --- Data: keep slim shareable parquet, exclude heavy ones ---
 data/raw/*
-data/processed/*
 !data/raw/.gitkeep
+data/processed/*
 !data/processed/.gitkeep
+!data/processed/hn_ai_slim.parquet
 
 # --- Model checkpoints and embeddings (regenerate from src) ---
 experiments/*
@@ -42,8 +43,8 @@ experiments/*
 *.pt
 *.pth
 
-# --- Results: figures (small PNGs) are tracked; CSVs are regenerable ---
-results/*.csv
+# --- Results: track CSVs and figures so collaborators can remix without rerunning ---
+# (CSVs total ~12 MB, dominated by sentiment_by_topic_W.csv)
 results/*.json
 
 # --- HuggingFace / NLTK caches if a user puts them here ---
