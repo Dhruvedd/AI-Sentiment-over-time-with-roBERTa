@@ -7,6 +7,7 @@ Outputs: cleaned/feature-engineered parquet ready for sentiment + topic modeling
 from __future__ import annotations
 
 import argparse
+import html
 import logging
 import re
 from pathlib import Path
@@ -29,6 +30,13 @@ DELETED_TOKENS = {"[deleted]", "[removed]", ""}
 def clean_text(s: str | None) -> str:
     if not isinstance(s, str) or s.strip() in DELETED_TOKENS:
         return ""
+    # HN BigQuery export preserves HTML entities as literal strings (e.g.
+    # "&#x27;", "&quot;"). Decode them before any other processing — otherwise
+    # they survive tokenization as junk tokens like "x27", "quot", "gt".
+    # Apply twice to handle double-encoded sequences sometimes seen in HN.
+    s = html.unescape(html.unescape(s))
+    # Strip residual HTML tags (HN comments allow <p>, <i>, <a href=...>).
+    s = re.sub(r"<[^>]+>", " ", s)
     s = URL_RE.sub(" ", s)
     s = emoji.replace_emoji(s, replace=" ")
     s = WHITESPACE_RE.sub(" ", s).strip()

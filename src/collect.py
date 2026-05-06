@@ -49,7 +49,12 @@ AI_KEYWORDS = [
     r"\bclaude\b",
 
     # --- Google ---
-    r"\bgemini\b",
+    # NOTE: "gemini" alone matches the Gemini internet protocol (gopher-like),
+    # which is heavily discussed on HN. Require AI context with a leading
+    # qualifier or trailing model version.
+    r"google gemini",
+    r"gemini (?:pro|ultra|nano|advanced|flash|2\.\d|1\.\d)",
+    r"gemini api",
     r"\bgemma\b",
     r"\bbard\b",
     r"google ai",
