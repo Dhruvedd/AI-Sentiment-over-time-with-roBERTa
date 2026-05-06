@@ -160,7 +160,3 @@ python -m src.export_share
 ```
 
 The analysis notebook (`notebooks/analysis.ipynb`) loads from these files only — clone the repo, install dependencies, open the notebook, and you can play with the data immediately. Section 13 of the notebook has copy-paste recipes for common slices (most-fearful posts, per-topic trajectories, custom event windows, etc.).
-
-## License
-
-Project is for academic use under CS439. The Hacker News dataset is public domain via Google BigQuery's public datasets program.
