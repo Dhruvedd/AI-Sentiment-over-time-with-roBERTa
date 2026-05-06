@@ -1,0 +1,47 @@
+# Project config — edit this, not the code.
+
+source: hackernews             # bigquery-public-data.hacker_news.full
+
+# Your GCP project ID (override with --project on the CLI)
+gcp_project_id: "REPLACE_ME"
+
+date_range:
+  start: "2022-01-01"
+  end:   "2026-04-30"
+
+sampling:
+  # We keep two parallel samples and report both for robustness:
+  top_n_per_day: 30            # top stories + top comments per day
+  min_score_threshold: 20      # alternate: stories with score >= 20
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  results_dir: results
+
+sentiment:
+  vader: true
+  afinn: true
+  nrc: true
+  hedging: true
+  transformer_model: "cardiffnlp/twitter-roberta-base-sentiment-latest"
+  transformer_max_length: 512    # 256 covers ~30% of HN texts; 512 covers ~80%
+  transformer_batch_size: 64     # tuned for 8GB VRAM (RTX 4060 Laptop)
+
+topics:
+  embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+  min_topic_size: 30
+  n_neighbors: 15              # UMAP
+  n_components: 5              # UMAP
+
+events:                        # for event-anchored analysis
+  - { date: "2022-11-30", label: "ChatGPT public release" }
+  - { date: "2023-03-14", label: "GPT-4 release" }
+  - { date: "2023-05-02", label: "WGA strike begins" }
+  - { date: "2023-07-13", label: "SAG-AFTRA strike begins" }
+  - { date: "2023-11-17", label: "OpenAI board crisis" }
+  - { date: "2024-02-15", label: "Sora announced" }
+  - { date: "2024-05-13", label: "GPT-4o announced" }
+  - { date: "2024-07-12", label: "EU AI Act enters force" }
+  - { date: "2024-09-12", label: "OpenAI o1 preview" }
+  - { date: "2025-01-20", label: "DeepSeek R1 release" }

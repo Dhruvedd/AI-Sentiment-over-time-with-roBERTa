@@ -1,0 +1,14 @@
+# Normalize line endings — keeps Windows + macOS + Linux teammates from
+# fighting over CRLF vs LF on every commit.
+* text=auto eol=lf
+
+# Treat these as binary so git doesn't try to diff them
+*.parquet binary
+*.bin     binary
+*.safetensors binary
+*.pkl     binary
+*.npy     binary
+*.npz     binary
+*.png     binary
+*.jpg     binary
+*.pdf     binary

@@ -1,0 +1,58 @@
+# --- Credentials and local config ---
+.env
+*.local
+gcloud-key*.json
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.Python
+build/
+dist/
+
+# --- Virtualenvs ---
+.venv/
+venv/
+env/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+notebooks/
+
+# --- Data (never commit raw or derived data; reproduce from src) ---
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# --- Model checkpoints and embeddings (regenerate from src) ---
+experiments/*
+!experiments/.gitkeep
+*.bin
+*.safetensors
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.pt
+*.pth
+
+# --- Results and figures (intermediate; final figures included manually) ---
+results/*
+!results/.gitkeep
+
+# --- HuggingFace / NLTK caches if a user puts them here ---
+.cache/
+nltk_data/
+
+# --- OS / IDE cruft ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
