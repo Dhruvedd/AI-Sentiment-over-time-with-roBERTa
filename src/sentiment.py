@@ -92,12 +92,14 @@ NRC_EMOTIONS = ["anger", "anticipation", "disgust", "fear", "joy",
 
 
 def _ensure_nltk_punkt():
-    """NRCLex needs NLTK's punkt tokenizer — download silently if missing."""
+    """NRCLex needs NLTK's punkt tokenizer — download silently if missing.
+    NLTK 3.8 can raise OSError (not just LookupError) on certain subpath
+    lookups even when the data is present, so we catch both."""
     import nltk
-    for pkg in ("punkt", "punkt_tab"):
+    for pkg in ("punkt_tab", "punkt"):
         try:
             nltk.data.find(f"tokenizers/{pkg}")
-        except LookupError:
+        except (LookupError, OSError):
             log.info(f"Downloading NLTK '{pkg}'...")
             nltk.download(pkg, quiet=True)
 
