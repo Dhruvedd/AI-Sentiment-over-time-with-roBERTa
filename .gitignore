@@ -19,8 +19,10 @@ venv/
 env/
 
 # --- Jupyter ---
+# Notebooks are local exploration; only the curated analysis notebook is shared.
 .ipynb_checkpoints/
-notebooks/
+notebooks/*
+!notebooks/analysis.ipynb
 
 # --- Data (never commit raw or derived data; reproduce from src) ---
 data/raw/*
@@ -40,9 +42,9 @@ experiments/*
 *.pt
 *.pth
 
-# --- Results and figures (intermediate; final figures included manually) ---
-results/*
-!results/.gitkeep
+# --- Results: figures (small PNGs) are tracked; CSVs are regenerable ---
+results/*.csv
+results/*.json
 
 # --- HuggingFace / NLTK caches if a user puts them here ---
 .cache/
